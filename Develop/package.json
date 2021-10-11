@@ -14,5 +14,11 @@
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^5.1.0"
+  },
+  "dependencies": {
+    "apollo": "^2.33.6",
+    "axios": "^0.22.0",
+    "bootstrap": "^5.1.1",
+    "dotenv": "^10.0.0"
   }
 }
