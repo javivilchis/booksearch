@@ -1,6 +1,6 @@
 {
      "name": "jvbooksearch-app",
-     "version": "1.0.0",
+     "version": "1.0.5",
      "description": "A booksearch app utilizing graphql and google api",
      "engines": {
        "node": "16.x"
@@ -20,4 +20,3 @@
        "concurrently": "^5.1.0"
      }
    }
-   
