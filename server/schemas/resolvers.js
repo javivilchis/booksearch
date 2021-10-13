@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Book } = require('../models');
+const { User } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -32,8 +32,8 @@ const resolvers = {
      
    },
    Mutation: {
-     addUser: async (parent, { name, email, password }) => {
-       const User = await User.create({ name, email, password });
+     addUser: async (parent, args) => {
+       const User = await User.create(args);
        const token = signToken(user);
  
        return { token, User };
@@ -54,19 +54,31 @@ const resolvers = {
        const token = signToken(User);
        return { token, User };
      },
-     saveBook: async (parent, {bookId, title, authors, description, image, link}) => {
-          const bookData = await Book.create({ bookId, title, authors, description, image, link })
-          if(!bookData){
-               return "there was an error";
-          }
-     }
-     ,
-     removeBook: async (parent, {bookId}) => {
-          const bookData = await user.findOne.update({ bookId })
-          if(!bookData){
-               return "there was an error";
-          }
-     }
+     saveBook: async (parent, { bookData }, context) => {
+        if (context.user) {
+            const updatedUser = await User.findByIdAndUpdate(
+                { _id: context.user._id },
+                { $push: { savedBooks: bookData } },
+                { new: true, runValidators: true }
+            );
+
+            return updatedUser;
+        }
+
+        throw new AuthenticationError('There was a request error...');
+    },
+    removeBook: async (parent, { bookId }, context) => {
+        if (context.user) {
+            const updatedUser = await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $pull: { savedBooks: { bookId: bookId } } },
+                { new: true }
+            );
+
+            return updatedUser;
+        }
+        throw new AuthenticationError('You need to be logged in!');
+    }
      
    }
 //
