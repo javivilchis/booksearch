@@ -60,6 +60,13 @@ const resolvers = {
                return "there was an error";
           }
      }
+     ,
+     removeBook: async (parent, {bookId}) => {
+          const bookData = await user.findOne.update({ bookId })
+          if(!bookData){
+               return "there was an error";
+          }
+     }
      
    }
 //
