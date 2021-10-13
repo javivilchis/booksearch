@@ -8,7 +8,9 @@
 
 _The objective of this project:_
 
-This book search application lets you search any book listed in the google api. You are able to create a membership, so that you can save your favorite book titles. This project utilizes a few neat products like: GraphQL, Node Js and JWT to login. <br>## Table of contents
+This book search application lets you search any book listed in the google api. You are able to create a membership, so that you can save your favorite book titles. This project utilizes a few neat products like: GraphQL, Node Js and JWT to login. 
+Take a look at the book search on heroku: (book search)[https://jvbooksearch.herokuapp.com/]
+## Table of contents
 
 - [Installation](#installation)
 - [Usage](#usage)
